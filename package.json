@@ -1,0 +1,40 @@
+{
+  "name": "tronflash-protocol",
+  "version": "1.0.0",
+  "description": "First Production-Grade Flashloan Infrastructure for TRON",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tronbox compile",
+    "migrate": "tronbox migrate",
+    "migrate:nile": "tronbox migrate --network nile",
+    "migrate:shasta": "tronbox migrate --network shasta",
+    "migrate:mainnet": "tronbox migrate --network mainnet",
+    "test": "tronbox test",
+    "test:nile": "tronbox test --network nile",
+    "console": "tronbox console",
+    "console:nile": "tronbox console --network nile",
+    "lint": "solhint 'contracts/**/*.sol'",
+    "lint:fix": "solhint 'contracts/**/*.sol' --fix",
+    "clean": "rm -rf build/",
+    "bootstrap": "node scripts/bootstrap.js",
+    "bootstrap:nile": "node scripts/bootstrap.js --network nile"
+  },
+  "keywords": [
+    "tron",
+    "flashloan",
+    "defi",
+    "trc20",
+    "tvm"
+  ],
+  "author": "TronFlash Protocol",
+  "license": "MIT",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "dotenv": "^16.3.1",
+    "solhint": "^4.0.0",
+    "tronbox": "^3.3.0"
+  },
+  "dependencies": {
+    "tronweb": "^5.3.0"
+  }
+}

@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+build/
+dist/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Testing
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker volumes
+tron-data/
+
+# Deployment artifacts (keep templates, ignore actual deployments)
+deployments/development.json
+deployments/nile.json
+deployments/shasta.json
+deployments/mainnet.json
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# TronBox artifacts (optional)
+# build/contracts/*.json

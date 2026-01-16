@@ -4,7 +4,7 @@ services:
   # Tron Quickstart - Local development blockchain
   tron-quickstart:
     image: trontools/quickstart:latest
-    container_name: tronflash-local-node
+    container_name: justflash-local-node
     ports:
       - "9090:9090"
     environment:
@@ -19,14 +19,14 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - tronflash-network
+      - justflash-network
 
   # Contract development environment
   contracts:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: tronflash-contracts
+    container_name: justflash-contracts
     volumes:
       - ./contracts:/app/contracts
       - ./migrations:/app/migrations
@@ -42,7 +42,7 @@ services:
       tron-quickstart:
         condition: service_healthy
     networks:
-      - tronflash-network
+      - justflash-network
     command: ["tail", "-f", "/dev/null"]
 
   # Frontend development server
@@ -50,7 +50,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: tronflash-frontend
+    container_name: justflash-frontend
     ports:
       - "5173:5173"
     volumes:
@@ -64,7 +64,7 @@ services:
     depends_on:
       - tron-quickstart
     networks:
-      - tronflash-network
+      - justflash-network
     command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 volumes:
@@ -73,5 +73,5 @@ volumes:
   frontend_node_modules:
 
 networks:
-  tronflash-network:
+  justflash-network:
     driver: bridge

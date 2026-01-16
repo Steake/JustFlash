@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title IPoolRegistry
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Interface for the pool registry contract
  * @dev Manages the mapping of tokens to their respective pool addresses
  */

@@ -3,7 +3,7 @@ const FeeCollector = artifacts.require("FeeCollector");
 const PoolRegistry = artifacts.require("PoolRegistry");
 
 /**
- * @title TronFlash Protocol Deployment
+ * @title JustFlash Protocol Deployment
  * @notice Deploys core protocol contracts
  *
  * Deployment Order:
@@ -22,7 +22,7 @@ module.exports = async function (deployer, network, accounts) {
   };
 
   console.log('========================================');
-  console.log('TronFlash Protocol Deployment');
+  console.log('JustFlash Protocol Deployment');
   console.log('========================================');
   console.log(`Network: ${network}`);
   console.log(`Deployer: ${owner}`);

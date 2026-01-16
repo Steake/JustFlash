@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title IFlashLoanReceiver
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Interface for flash loan receiver contracts
  * @dev All contracts that wish to receive flash loans must implement this interface.
  * The implementing contract will receive the borrowed tokens and must repay them

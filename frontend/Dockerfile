@@ -1,4 +1,4 @@
-# TronFlash Dashboard - Frontend
+# JustFlash Dashboard - Frontend
 FROM node:20-alpine
 
 WORKDIR /app

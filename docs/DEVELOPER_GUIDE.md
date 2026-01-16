@@ -1,4 +1,4 @@
-# TronFlash Protocol - Developer Integration Guide
+# JustFlash Protocol - Developer Integration Guide
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 
 ## Introduction
 
-TronFlash is the first production-grade flash loan protocol for the TRON blockchain. Flash loans allow you to borrow any amount of supported tokens without collateral, provided you return the borrowed amount plus a small fee within the same transaction.
+JustFlash is the first production-grade flash loan protocol for the TRON blockchain. Flash loans allow you to borrow any amount of supported tokens without collateral, provided you return the borrowed amount plus a small fee within the same transaction.
 
 ### Key Features
 
@@ -58,7 +58,7 @@ import "./interfaces/IFlashLoanPool.sol";
 Or install via npm (when published):
 
 ```bash
-npm install @tronflash/contracts
+npm install @justflash/contracts
 ```
 
 ---
@@ -430,8 +430,8 @@ A: Use our local Docker environment or deploy to Nile testnet.
 ## Support
 
 - **GitHub**: https://github.com/Steake/JustFlash
-- **Documentation**: https://docs.tronflash.io
-- **Discord**: https://discord.gg/tronflash
+- **Documentation**: https://docs.justflash.io
+- **Discord**: https://discord.gg/justflash
 
 ---
 

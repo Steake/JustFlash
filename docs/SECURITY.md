@@ -1,8 +1,8 @@
-# TronFlash Protocol - Security Documentation
+# JustFlash Protocol - Security Documentation
 
 ## Overview
 
-This document outlines the security measures, audit status, and best practices for the TronFlash Protocol.
+This document outlines the security measures, audit status, and best practices for the JustFlash Protocol.
 
 ## Security Architecture
 
@@ -89,7 +89,7 @@ function setFeeCollector(address collector) external onlyOwner { ... }
 
 ### 1. Oracle Dependency
 
-TronFlash does not use price oracles for core functionality. Strategies using flash loans (arbitrage, liquidations) may depend on external oracles - this is the user's responsibility.
+JustFlash does not use price oracles for core functionality. Strategies using flash loans (arbitrage, liquidations) may depend on external oracles - this is the user's responsibility.
 
 ### 2. Admin Privileges
 
@@ -216,7 +216,7 @@ The protocol can be paused by:
 ## Contact
 
 For security concerns, contact:
-- **Security Email**: security@tronflash.io
+- **Security Email**: security@justflash.io
 - **GitHub Security Advisory**: Submit privately on GitHub
 
 ---

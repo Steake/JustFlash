@@ -1,5 +1,5 @@
 /**
- * TronFlash Protocol - TronLink Wallet Integration
+ * JustFlash Protocol - TronLink Wallet Integration
  * Provides wallet connection and contract interaction utilities
  */
 

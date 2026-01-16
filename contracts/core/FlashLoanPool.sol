@@ -11,7 +11,7 @@ import "../interfaces/IFeeCollector.sol";
 
 /**
  * @title FlashLoanPool
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Core flash loan pool contract for TRON
  * @dev Implements pool-based flash loan architecture inspired by Aave V3,
  * adapted for TVM's resource model. Supports ERC-4626 vault pattern for LP shares.

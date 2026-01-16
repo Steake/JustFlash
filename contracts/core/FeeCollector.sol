@@ -9,7 +9,7 @@ import "../interfaces/IFeeCollector.sol";
 
 /**
  * @title FeeCollector
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Handles protocol fee accumulation and distribution
  * @dev Splits flash loan fees between treasury (20%) and depositors (80%)
  * according to the protocol specification.

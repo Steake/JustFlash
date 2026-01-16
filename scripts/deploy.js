@@ -1,5 +1,5 @@
 /**
- * @title TronFlash Protocol Deployment Script
+ * @title JustFlash Protocol Deployment Script
  * @notice Alternative deployment using TronWeb directly
  *
  * Usage:
@@ -54,7 +54,7 @@ const tokensByNetwork = {
 
 async function main() {
   console.log('========================================');
-  console.log('TronFlash Protocol Deployment');
+  console.log('JustFlash Protocol Deployment');
   console.log('========================================');
   console.log(`Network: ${network}`);
   console.log('========================================\n');

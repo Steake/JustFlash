@@ -24,7 +24,7 @@
 	<div class="header-content">
 		<div class="logo">
 			<span class="logo-icon">⚡</span>
-			<span class="logo-text">TronFlash</span>
+			<span class="logo-text">JustFlash</span>
 		</div>
 
 		<nav>

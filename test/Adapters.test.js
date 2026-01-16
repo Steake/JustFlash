@@ -50,7 +50,6 @@ contract("Adapters", (accounts) => {
       await profitableReceiver.initiateFlashLoan(usdt.address, LOAN_AMOUNT, "0x", { from: owner });
       
       const profit = await profitableReceiver.profit();
-      const balanceAfter = await usdt.balanceOf(profitableReceiver.address);
       
       // Should have profit equal to initial balance minus amount owed
       const expectedPremium = LOAN_AMOUNT.mul(web3.utils.toBN(FLASH_LOAN_FEE)).div(web3.utils.toBN(10000));

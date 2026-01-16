@@ -3,7 +3,7 @@
  * Provides wallet connection and contract interaction utilities
  */
 
-import { writable, derived, type Readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 // Contract addresses (to be configured per network)
 export const CONTRACTS = {
@@ -113,14 +113,28 @@ export async function updateBalance(): Promise<void> {
 }
 
 // Detect current network from TronWeb configuration
+// Uses TronWeb's fullNode property with fallback handling for API changes
 async function detectNetwork(): Promise<void> {
 	if (!window.tronWeb) return;
 	
 	try {
-		// Access fullNode host through TronWeb's fullNode property
-		const tronWebAny = window.tronWeb as Record<string, unknown>;
-		const fullNode = tronWebAny.fullNode as Record<string, string> | undefined;
-		const fullHost = fullNode?.host ?? '';
+		// Attempt to get fullNode host with multiple fallback approaches
+		let fullHost = '';
+		
+		// Try common TronWeb property paths
+		const tronWeb = window.tronWeb as Record<string, unknown>;
+		if (tronWeb.fullNode && typeof tronWeb.fullNode === 'object') {
+			const fullNode = tronWeb.fullNode as Record<string, unknown>;
+			if (typeof fullNode.host === 'string') {
+				fullHost = fullNode.host;
+			}
+		}
+		
+		// Fallback: if no host found, set to unknown
+		if (!fullHost) {
+			networkName.set('Unknown Network');
+			return;
+		}
 		
 		// Parse the URL to get the hostname for secure comparison
 		let hostname = '';
@@ -128,10 +142,11 @@ async function detectNetwork(): Promise<void> {
 			const url = new URL(fullHost.startsWith('http') ? fullHost : `https://${fullHost}`);
 			hostname = url.hostname.toLowerCase();
 		} catch {
-			hostname = fullHost.toLowerCase();
+			networkName.set('Unknown Network');
+			return;
 		}
 		
-		// Check for specific TronGrid hostnames
+		// Check for specific TronGrid hostnames with exact matching
 		if (hostname === 'api.trongrid.io') {
 			networkName.set('Mainnet');
 		} else if (hostname === 'nile.trongrid.io') {
@@ -144,10 +159,10 @@ async function detectNetwork(): Promise<void> {
 			// Other TronGrid subdomains
 			networkName.set('TronGrid Network');
 		} else {
-			networkName.set('Unknown Network');
+			networkName.set('Custom Network');
 		}
 	} catch {
-		networkName.set('Unknown');
+		networkName.set('Unknown Network');
 	}
 }
 

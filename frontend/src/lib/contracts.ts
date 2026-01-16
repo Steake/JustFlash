@@ -4,7 +4,7 @@
  */
 
 import { writable, get } from 'svelte/store';
-import { walletConnected, walletAddress, walletError, getContract, parseAmount, formatAmount } from './wallet';
+import { walletConnected, walletAddress, walletError, getContract, parseAmount } from './wallet';
 
 // Pool data store
 export interface PoolData {
@@ -20,97 +20,8 @@ export interface PoolData {
 export const poolsData = writable<PoolData[]>([]);
 export const isLoading = writable(false);
 
-// Flash Loan Pool ABI (simplified)
-const FLASH_LOAN_POOL_ABI = [
-	{
-		inputs: [{ name: 'token', type: 'address' }],
-		name: 'getAvailableLiquidity',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [],
-		name: 'getFlashLoanFee',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'token', type: 'address' }],
-		name: 'getTotalPoolShares',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'user', type: 'address' }, { name: 'token', type: 'address' }],
-		name: 'getPoolShares',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'token', type: 'address' }, { name: 'shares', type: 'uint256' }],
-		name: 'sharesToAmount',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [],
-		name: 'getSupportedTokens',
-		outputs: [{ name: '', type: 'address[]' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'token', type: 'address' }, { name: 'amount', type: 'uint256' }],
-		name: 'deposit',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'token', type: 'address' }, { name: 'shares', type: 'uint256' }],
-		name: 'withdraw',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	}
-];
-
-// TRC-20 ABI (minimal)
-const TRC20_ABI = [
-	{
-		inputs: [],
-		name: 'symbol',
-		outputs: [{ name: '', type: 'string' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [],
-		name: 'decimals',
-		outputs: [{ name: '', type: 'uint8' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'account', type: 'address' }],
-		name: 'balanceOf',
-		outputs: [{ name: '', type: 'uint256' }],
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		inputs: [{ name: 'spender', type: 'address' }, { name: 'amount', type: 'uint256' }],
-		name: 'approve',
-		outputs: [{ name: '', type: 'bool' }],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	}
-];
+// Note: ABIs are loaded dynamically from contract instances via getContract()
+// TronWeb handles ABI resolution when connecting to deployed contracts
 
 // Load pool data
 export async function loadPoolData(poolAddress: string, tokenAddresses: string[]): Promise<void> {

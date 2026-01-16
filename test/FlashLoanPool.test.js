@@ -8,7 +8,7 @@ const MockFlashLoanReceiver = artifacts.require("MockFlashLoanReceiver");
  * @notice Comprehensive tests for the core flash loan functionality
  */
 contract("FlashLoanPool", (accounts) => {
-  const [owner, user1, user2, treasury] = accounts;
+  const [owner, user1, , treasury] = accounts;
   
   // Contract instances
   let pool;
@@ -175,7 +175,7 @@ contract("FlashLoanPool", (accounts) => {
     });
 
     it("should execute successful flash loan", async () => {
-      const tx = await receiver.initiateFlashLoan(usdt.address, LOAN_AMOUNT, "0x", { from: user1 });
+      await receiver.initiateFlashLoan(usdt.address, LOAN_AMOUNT, "0x", { from: user1 });
       
       // Check receiver received callback
       const callCount = await receiver.callCount();
@@ -294,9 +294,9 @@ contract("FlashLoanPool", (accounts) => {
       // Check that total deposits increased (from depositor fee share)
       const totalDeposits = await pool.getTotalDeposits(usdt.address);
       
-      // 80% of premium goes to depositors
-      const premium = LOAN_AMOUNT.mul(web3.utils.toBN(FLASH_LOAN_FEE)).div(web3.utils.toBN(10000));
-      const depositorShare = premium.mul(web3.utils.toBN(80)).div(web3.utils.toBN(100));
+      // 80% of premium goes to depositors (calculated but not used in assertion)
+      // const premium = LOAN_AMOUNT.mul(web3.utils.toBN(FLASH_LOAN_FEE)).div(web3.utils.toBN(10000));
+      // const depositorShare = premium.mul(web3.utils.toBN(80)).div(web3.utils.toBN(100));
       
       // Total deposits should have increased by depositor share
       // (Note: In current implementation, depositor share is returned to pool)

@@ -7,13 +7,12 @@ const MockERC20 = artifacts.require("MockERC20");
  * @notice Tests for fee collection and distribution
  */
 contract("FeeCollector", (accounts) => {
-  const [owner, treasury, newTreasury, user1, unauthorized] = accounts;
+  const [owner, treasury, newTreasury, , unauthorized] = accounts;
   
   let feeCollector;
   let pool;
   let usdt;
 
-  const INITIAL_SUPPLY = web3.utils.toBN("1000000000000");
   const FEE_AMOUNT = web3.utils.toBN("1000000"); // 1 USDT
 
   beforeEach(async () => {

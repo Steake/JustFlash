@@ -1,0 +1,26 @@
+# TronFlash Protocol - Contract Development Environment
+FROM node:20-alpine
+
+# Install git and build tools
+RUN apk add --no-cache git python3 make g++
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy contract files
+COPY contracts/ ./contracts/
+COPY migrations/ ./migrations/
+COPY scripts/ ./scripts/
+COPY test/ ./test/
+COPY tronbox.js ./
+
+# Compile contracts
+RUN npm run compile || true
+
+# Default command
+CMD ["npm", "run", "console"]

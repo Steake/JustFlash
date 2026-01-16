@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Tron Quickstart - Local development blockchain
+  tron-quickstart:
+    image: trontools/quickstart:latest
+    container_name: tronflash-local-node
+    ports:
+      - "9090:9090"
+    environment:
+      - ACCOUNTS_AMOUNT=10
+      - ACCOUNTS_DEFAULT_BALANCE=100000
+      - MNEMONIC=candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
+    volumes:
+      - tron-data:/tron
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/wallet/getnowblock"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - tronflash-network
+
+  # Contract development environment
+  contracts:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: tronflash-contracts
+    volumes:
+      - ./contracts:/app/contracts
+      - ./migrations:/app/migrations
+      - ./scripts:/app/scripts
+      - ./test:/app/test
+      - ./tronbox.js:/app/tronbox.js
+      - ./package.json:/app/package.json
+      - node_modules:/app/node_modules
+    environment:
+      - HOST_PORT=9090
+      - PRIVATE_KEY_DEV=da146374a75310b9666e834ee4ad0866d6f4035967bfc76217c5a495fff9f0d0
+    depends_on:
+      tron-quickstart:
+        condition: service_healthy
+    networks:
+      - tronflash-network
+    command: ["tail", "-f", "/dev/null"]
+
+  # Frontend development server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tronflash-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    environment:
+      - VITE_TRON_NETWORK=development
+      - VITE_FLASH_LOAN_POOL_ADDRESS=
+      - VITE_FEE_COLLECTOR_ADDRESS=
+      - VITE_POOL_REGISTRY_ADDRESS=
+    depends_on:
+      - tron-quickstart
+    networks:
+      - tronflash-network
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+volumes:
+  tron-data:
+  node_modules:
+  frontend_node_modules:
+
+networks:
+  tronflash-network:
+    driver: bridge

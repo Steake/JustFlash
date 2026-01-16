@@ -197,12 +197,32 @@ async function deployContract(tronWeb, contractData, constructorArgs) {
   const signedTx = await tronWeb.trx.sign(transaction);
   const receipt = await tronWeb.trx.sendRawTransaction(signedTx);
 
-  // Wait for confirmation
-  await new Promise(resolve => setTimeout(resolve, 5000));
+  // Wait for transaction confirmation with polling
+  const txID = receipt.transaction.txID;
+  let confirmed = false;
+  let attempts = 0;
+  const maxAttempts = 30;
+  
+  while (!confirmed && attempts < maxAttempts) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const txInfo = await tronWeb.trx.getTransactionInfo(txID);
+      if (txInfo && txInfo.id) {
+        confirmed = true;
+      }
+    } catch {
+      // Transaction not yet confirmed, continue polling
+    }
+    attempts++;
+  }
+
+  if (!confirmed) {
+    console.warn(`Warning: Transaction ${txID} confirmation not detected after ${maxAttempts} seconds`);
+  }
 
   return {
     address: tronWeb.address.fromHex(receipt.transaction.contract_address),
-    txID: receipt.transaction.txID,
+    txID,
   };
 }
 

@@ -53,12 +53,13 @@ contract ReentrantReceiver is IFlashLoanReceiver {
         attackCount = 0;
     }
 
-    function initiateFlashLoan(uint256 amount) external {
+    function initiateFlashLoan(address _token, uint256 amount) external {
+        token = _token;
         (bool success,) = pool.call(
             abi.encodeWithSignature(
                 "flashLoan(address,address,uint256,bytes)",
                 address(this),
-                token,
+                _token,
                 amount,
                 ""
             )

@@ -112,22 +112,37 @@ export async function updateBalance(): Promise<void> {
 	}
 }
 
-// Detect current network
+// Detect current network from TronWeb configuration
 async function detectNetwork(): Promise<void> {
 	if (!window.tronWeb) return;
 	
 	try {
-		// Try to detect by full host URL
-		const fullHost = (window.tronWeb as unknown as { fullNode?: { host?: string } }).fullNode?.host || '';
+		// Access fullNode host through TronWeb's fullNode property
+		const tronWebAny = window.tronWeb as Record<string, unknown>;
+		const fullNode = tronWebAny.fullNode as Record<string, string> | undefined;
+		const fullHost = fullNode?.host ?? '';
 		
-		if (fullHost.includes('trongrid.io') && !fullHost.includes('nile') && !fullHost.includes('shasta')) {
+		// Parse the URL to get the hostname for secure comparison
+		let hostname = '';
+		try {
+			const url = new URL(fullHost.startsWith('http') ? fullHost : `https://${fullHost}`);
+			hostname = url.hostname.toLowerCase();
+		} catch {
+			hostname = fullHost.toLowerCase();
+		}
+		
+		// Check for specific TronGrid hostnames
+		if (hostname === 'api.trongrid.io') {
 			networkName.set('Mainnet');
-		} else if (fullHost.includes('nile')) {
+		} else if (hostname === 'nile.trongrid.io') {
 			networkName.set('Nile Testnet');
-		} else if (fullHost.includes('shasta')) {
+		} else if (hostname === 'api.shasta.trongrid.io') {
 			networkName.set('Shasta Testnet');
-		} else if (fullHost.includes('localhost') || fullHost.includes('127.0.0.1')) {
+		} else if (hostname === 'localhost' || hostname === '127.0.0.1') {
 			networkName.set('Local Development');
+		} else if (hostname.endsWith('.trongrid.io')) {
+			// Other TronGrid subdomains
+			networkName.set('TronGrid Network');
 		} else {
 			networkName.set('Unknown Network');
 		}

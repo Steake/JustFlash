@@ -52,8 +52,8 @@ contract("Security", (accounts) => {
       // The reentrancy guard should prevent the attack
       // The inner call will fail with ReentrancyGuardReentrantCall
       try {
-        // Set the token first
-        await pool.flashLoan(reentrantReceiver.address, usdt.address, LOAN_AMOUNT, "0x", { from: attacker });
+        // Initiate flash loan with token address specified
+        await reentrantReceiver.initiateFlashLoan(usdt.address, LOAN_AMOUNT, { from: attacker });
         // If we get here, check that the attack was blocked
         const attackCount = await reentrantReceiver.attackCount();
         assert(attackCount.toNumber() <= 1, "Reentrancy should be blocked");

@@ -6,7 +6,7 @@ module.exports = {
   networks: {
     // Local development network (Tron Quickstart)
     development: {
-      privateKey: process.env.PRIVATE_KEY_DEV || 'da146374a75310b9666e834ee4ad0866d6f4035967bfc76217c5a495fff9f0d0',
+      privateKey: process.env.PRIVATE_KEY_DEV,
       userFeePercentage: 100,
       feeLimit: 1000 * 1e6,
       fullHost: `http://127.0.0.1:${port}`,

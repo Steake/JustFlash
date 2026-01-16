@@ -6,7 +6,7 @@ import "../interfaces/IPoolRegistry.sol";
 
 /**
  * @title PoolRegistry
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Manages the mapping of tokens to their pool addresses
  * @dev Provides centralized registry for token support and pool discovery.
  * Governance can add/remove tokens after security review.

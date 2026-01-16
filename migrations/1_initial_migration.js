@@ -4,5 +4,5 @@
  */
 module.exports = function (deployer) {
   // Placeholder for TronBox migrations
-  console.log('Starting TronFlash Protocol deployment...');
+  console.log('Starting JustFlash Protocol deployment...');
 };

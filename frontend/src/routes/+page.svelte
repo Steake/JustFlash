@@ -83,7 +83,7 @@
 </script>
 
 <svelte:head>
-	<title>TronFlash Protocol - Flash Loan Dashboard</title>
+	<title>JustFlash Protocol - Flash Loan Dashboard</title>
 </svelte:head>
 
 <div class="app">
@@ -152,7 +152,7 @@
 	</main>
 
 	<footer>
-		<p>TronFlash Protocol - First Production-Grade Flash Loan Infrastructure for TRON</p>
+		<p>JustFlash Protocol - First Production-Grade Flash Loan Infrastructure for TRON</p>
 		<p class="links">
 			<a href="https://github.com/Steake/JustFlash" target="_blank">GitHub</a>
 			<span>•</span>

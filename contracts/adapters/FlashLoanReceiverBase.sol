@@ -10,7 +10,7 @@ import "../interfaces/IFlashLoanPool.sol";
 
 /**
  * @title FlashLoanReceiverBase
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Abstract base contract for flash loan receivers
  * @dev Provides common functionality and safety checks for flash loan receivers.
  * Third-party protocols should inherit from this contract.

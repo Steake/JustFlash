@@ -1,5 +1,5 @@
 /**
- * TronFlash Protocol - Contract Interaction Module
+ * JustFlash Protocol - Contract Interaction Module
  * Provides functions for interacting with protocol contracts
  */
 

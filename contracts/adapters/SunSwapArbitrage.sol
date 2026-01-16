@@ -7,7 +7,7 @@ import "./FlashLoanReceiverBase.sol";
 
 /**
  * @title SunSwapArbitrage
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Flash loan receiver for SunSwap arbitrage
  * @dev Enables zero-capital arbitrage between SunSwap pools or against external venues.
  *

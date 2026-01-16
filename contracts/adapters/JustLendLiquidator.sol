@@ -7,18 +7,18 @@ import "./FlashLoanReceiverBase.sol";
 
 /**
  * @title JustLendLiquidator
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Flash loan receiver for JustLend liquidations
  * @dev Enables zero-capital liquidations on JustLend protocol.
  *
  * Execution Flow:
- * 1. Flashloan USDT (debt token) from TronFlash
+ * 1. Flashloan USDT (debt token) from JustFlash
  * 2. Approve JustLend jToken contract for USDT
  * 3. Call jToken.liquidateBorrow(borrower, repayAmount, jTokenCollateral)
  * 4. Receive seized collateral (jTokens)
  * 5. Redeem jTokens for underlying collateral
  * 6. Swap collateral to USDT via SunSwap
- * 7. Approve TronFlash for USDT (amount + premium)
+ * 7. Approve JustFlash for USDT (amount + premium)
  * 8. Return true from executeOperation(); profit remains in contract
  */
 contract JustLendLiquidator is FlashLoanReceiverBase {

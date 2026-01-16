@@ -1,5 +1,5 @@
 {
-  "name": "tronflash-protocol",
+  "name": "justflash-protocol",
   "version": "1.0.0",
   "description": "First Production-Grade Flashloan Infrastructure for TRON",
   "main": "index.js",
@@ -26,7 +26,7 @@
     "trc20",
     "tvm"
   ],
-  "author": "TronFlash Protocol",
+  "author": "JustFlash Protocol",
   "license": "MIT",
   "devDependencies": {
     "@openzeppelin/contracts": "^5.0.0",

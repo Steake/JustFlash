@@ -1,4 +1,4 @@
-# TronFlash Protocol - Contract Development Environment
+# JustFlash Protocol - Contract Development Environment
 FROM node:20-alpine
 
 # Install git and build tools

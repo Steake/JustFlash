@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title IFlashLoanPool
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Interface for the flash loan pool contract
  * @dev Defines the core functions for flash loans, deposits, and withdrawals
  */

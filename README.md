@@ -1,4 +1,4 @@
-# TronFlash Protocol
+# JustFlash Protocol
 
 <p align="center">
   <strong>First Production-Grade Flash Loan Infrastructure for TRON</strong>
@@ -18,9 +18,9 @@
 
 ## Overview
 
-TronFlash is a native flash loan protocol for the TRON blockchain, enabling zero-capital DeFi strategies including arbitrage, liquidations, and collateral swaps. Built with security-first principles and optimized for TVM's energy model.
+JustFlash is a native flash loan protocol for the TRON blockchain, enabling zero-capital DeFi strategies including arbitrage, liquidations, and collateral swaps. Built with security-first principles and optimized for TVM's energy model.
 
-### Why TronFlash?
+### Why JustFlash?
 
 - **First Mover**: No production-grade flash loan infrastructure exists on TRON ($8.25B TVL)
 - **Zero Capital Required**: Execute complex DeFi strategies without upfront capital
@@ -46,7 +46,7 @@ TronFlash is a native flash loan protocol for the TRON blockchain, enabling zero
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        TronFlash Protocol                        │
+│                        JustFlash Protocol                        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  ┌──────────────────┐    ┌──────────────────┐                   │

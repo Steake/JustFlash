@@ -1,5 +1,5 @@
 /**
- * @title TronFlash Protocol Bootstrap Script
+ * @title JustFlash Protocol Bootstrap Script
  * @notice Seeds initial liquidity and configures protocol parameters
  *
  * Usage:
@@ -77,7 +77,7 @@ const FLASH_LOAN_POOL_ABI = [
 
 async function main() {
   console.log('========================================');
-  console.log('TronFlash Protocol Bootstrap');
+  console.log('JustFlash Protocol Bootstrap');
   console.log('========================================');
   console.log(`Network: ${network}`);
   console.log(`Liquidity Amount: ${liquidityAmount}`);

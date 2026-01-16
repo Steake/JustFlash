@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title IFeeCollector
- * @author TronFlash Protocol
+ * @author JustFlash Protocol
  * @notice Interface for the fee collector contract
  * @dev Handles protocol fee accumulation and distribution
  */

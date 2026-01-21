@@ -1,0 +1,116 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { fly, fade } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
+  
+  interface Activity {
+    id: string;
+    type: 'deployment' | 'transaction' | 'alert' | 'milestone';
+    title: string;
+    description: string;
+    timestamp: Date;
+    severity: 'info' | 'success' | 'warning' | 'error';
+    icon: string;
+  }
+  
+  let activities:  Activity[] = [];
+  
+  onMount(() => {
+    // Simulate real-time activities
+    const interval = setInterval(() => {
+      addActivity(generateRandomActivity());
+    }, 5000);
+    
+    // Add initial activities
+    for (let i = 0; i < 5; i++) {
+      addActivity(generateRandomActivity());
+    }
+    
+    return () => clearInterval(interval);
+  });
+  
+  function addActivity(activity: Activity) {
+    activities = [activity, ...activities]. slice(0, 10);
+  }
+  
+  function generateRandomActivity(): Activity {
+    const types = [
+      {
+        type: 'deployment' as const,
+        title: 'Smart Contract Deployed',
+        description: 'FlashLoan contract deployed to mainnet',
+        severity:  'success' as const,
+        icon: '🚀'
+      },
+      {
+        type: 'transaction' as const,
+        title: 'Large Transaction Detected',
+        description: '$500,000 flash loan executed',
+        severity: 'info' as const,
+        icon:  '💸'
+      },
+      {
+        type: 'alert' as const,
+        title: 'Gas Price Spike',
+        description: 'Network gas price increased by 150%',
+        severity: 'warning' as const,
+        icon: '⚠️'
+      },
+      {
+        type: 'milestone' as const,
+        title: 'Milestone Reached',
+        description: '10,000 users milestone achieved! ',
+        severity: 'success' as const,
+        icon:  '🎯'
+      }
+    ];
+    
+    const activity = types[Math.floor(Math.random() * types.length)];
+    
+    return {
+      ... activity,
+      id: Math.random().toString(36).substr(2, 9),
+      timestamp: new Date()
+    };
+  }
+  
+  function getSeverityColor(severity: string) {
+    switch (severity) {
+      case 'success':  return 'bg-green-500/20 text-green-400 border-green-500/30';
+      case 'warning': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+      case 'error': return 'bg-red-500/20 text-red-400 border-red-500/30';
+      default: return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+    }
+  }
+</script>
+
+<div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-lg font-semibold text-white">Live Activity Feed</h3>
+    <div class="flex items-center space-x-2">
+      <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+      <span class="text-sm text-gray-400">Live</span>
+    </div>
+  </div>
+  
+  <div class="space-y-3 max-h-96 overflow-y-auto">
+    {#each activities as activity (activity.id)}
+      <div
+        animate:flip={{ duration: 300 }}
+        in:fly={{ x: -20, duration: 300 }}
+        out:fade={{ duration: 200 }}
+        class="flex items-start space-x-3 p-3 rounded-lg border {getSeverityColor(activity.severity)} 
+               hover:scale-[1.02] transition-transform"
+      >
+        <span class="text-2xl">{activity.icon}</span>
+        <div class="flex-1">
+          <p class="font-semibold">{activity.title}</p>
+          <p class="text-sm opacity-80">{activity.description}</p>
+          <p class="text-xs opacity-60 mt-1">
+            {activity.timestamp.toLocaleTimeString()}
+          </p>
+        </div>
+      </div>
+    {/each}
+  </div>
+</div>

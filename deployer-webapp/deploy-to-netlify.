@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# Initialize git repository if not already initialized
+git init
+
+# Create .gitignore file
+cat > .gitignore << 'EOF'
+# Dependencies
+node_modules/
+. pnp
+.pnp.js
+
+# Production
+/build
+/dist
+/.svelte-kit
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+. env.production.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Netlify
+.netlify/
+
+# Test coverage
+/coverage
+
+# Typescript
+*.tsbuildinfo
+
+# Cache
+.cache/
+.parcel-cache/
+EOF
+
+# Create environment example file
+cat > .env.example << 'EOF'
+# Network Configuration
+PUBLIC_RPC_URL=https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY
+PUBLIC_CHAIN_ID=1
+PUBLIC_NETWORK_NAME=mainnet
+
+# WebSocket for real-time updates
+VITE_WS_URL=wss://deploy. justflash.io/ws
+
+# Contract Addresses (populated after deployment)
+PUBLIC_FLASH_TOKEN_ADDRESS=
+PUBLIC_JUSTFLASH_CORE_ADDRESS=
+PUBLIC_GOVERNANCE_ADDRESS=
+PUBLIC_TREASURY_ADDRESS=
+
+# API Configuration
+PUBLIC_BACKEND_API=https://api.justflash.io
+PUBLIC_WEBSOCKET_URL=wss://ws.justflash.io
+
+# Monitoring
+SENTRY_DSN=
+DATADOG_API_KEY=
+
+# IPFS
+IPFS_GATEWAY=https://gateway.pinata.cloud
+PINATA_API_KEY=
+PINATA_SECRET_KEY=
+
+# Multi-sig
+MULTISIG_ADDRESS=
+MULTISIG_OWNERS=
+MULTISIG_THRESHOLD=3
+
+# Supabase (for real-time data)
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+
+# Deployment Network
+DEPLOY_NETWORK=mainnet
+DEPLOYER_PRIVATE_KEY=
+EOF
+
+# Add all files to git
+git add .
+
+# Create initial commit
+git commit -m "Initial commit: JustFlash Mainnet Deployment Dashboard
+
+- Complete deployment infrastructure for mainnet launch
+- Real-time monitoring and tracking dashboard
+- Marketing and business development task management
+- Onchain operations with stepwise execution
+- Multi-signature wallet integration
+- Oracle infrastructure setup
+- Liquidity operations management
+- Emergency response protocols
+- Gas optimization strategies
+- Netlify deployment configuration"
+
+# Add remote repository (replace with your actual repository URL)
+git remote add origin https://github.com/Steake/JustFlash. git
+
+# Push to master branch
+git push -u origin master

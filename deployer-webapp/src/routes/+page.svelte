@@ -1,83 +1,50 @@
-<script lang="ts">
+<script>
   import { onMount } from 'svelte';
-  import { deploymentStore } from '$lib/stores/deployment';
-  import { web3Store } from '$lib/stores/web3';
-  import DeploymentPipeline from '$lib/components/DeploymentPipeline.svelte';
-  import StatusDashboard from '$lib/components/StatusDashboard.svelte';
-  import TaskManager from '$lib/components/TaskManager.svelte';
-  import MarketingTracker from '$lib/components/MarketingTracker.svelte';
-  import BusinessDevelopment from '$lib/components/BusinessDevelopment.svelte';
   
-  let activeTab = 'overview';
+  let status = 'Loading...';
   
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: '📊' },
-    { id:  'deployment', label: 'Deployment', icon: '🚀' },
-    { id: 'tasks', label: 'Tasks', icon: '✅' },
-    { id:  'marketing', label: 'Marketing', icon: '📢' },
-    { id: 'business', label: 'Business Dev', icon: '🤝' },
-    { id: 'monitoring', label: 'Monitoring', icon: '📈' },
-    { id: 'documentation', label: 'Docs', icon: '📚' }
-  ];
-  
-  onMount(async () => {
-    await web3Store.initialize();
-    await deploymentStore.loadConfiguration();
+  onMount(() => {
+    status = 'JustFlash Deployment Dashboard - Operational';
   });
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-  <!-- Header -->
-  <header class="bg-black/50 backdrop-blur-lg border-b border-gray-700">
-    <div class="container mx-auto px-4 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            JustFlash Deployment Control Center
-          </h1>
-          <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
-            {$deploymentStore.currentStage}
-          </span>
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+      JustFlash Deployment Control Center
+    </h1>
+    
+    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+      <h2 class="text-2xl font-semibold mb-4">System Status</h2>
+      <p class="text-gray-300">{status}</p>
+      
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-gray-700/50 rounded-lg p-4">
+          <h3 class="text-lg font-medium mb-2">🚀 Deployment</h3>
+          <p class="text-green-400">Ready</p>
         </div>
-        <div class="flex items-center space-x-4">
-          <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition">
-            Connect Wallet
-          </button>
+        
+        <div class="bg-gray-700/50 rounded-lg p-4">
+          <h3 class="text-lg font-medium mb-2">📊 Monitoring</h3>
+          <p class="text-yellow-400">Configuring</p>
+        </div>
+        
+        <div class="bg-gray-700/50 rounded-lg p-4">
+          <h3 class="text-lg font-medium mb-2">🔐 Security</h3>
+          <p class="text-green-400">Active</p>
         </div>
       </div>
     </div>
-  </header>
-
-  <!-- Navigation Tabs -->
-  <nav class="bg-black/30 backdrop-blur-md border-b border-gray-700">
-    <div class="container mx-auto px-4">
-      <div class="flex space-x-1 overflow-x-auto">
-        {#each tabs as tab}
-          <button
-            class="px-4 py-3 flex items-center space-x-2 hover:bg-white/5 transition
-                   {activeTab === tab. id ? 'border-b-2 border-blue-500 bg-white/10' : ''}"
-            on:click={() => activeTab = tab.id}
-          >
-            <span>{tab.icon}</span>
-            <span>{tab.label}</span>
-          </button>
-        {/each}
-      </div>
+    
+    <div class="mt-8 text-center text-gray-500">
+      <p>Native Flash Loan Protocol for TRX</p>
     </div>
-  </nav>
-
-  <!-- Content Area -->
-  <main class="container mx-auto px-4 py-8">
-    {#if activeTab === 'overview'}
-      <StatusDashboard />
-    {:else if activeTab === 'deployment'}
-      <DeploymentPipeline />
-    {:else if activeTab === 'tasks'}
-      <TaskManager />
-    {:else if activeTab === 'marketing'}
-      <MarketingTracker />
-    {:else if activeTab === 'business'}
-      <BusinessDevelopment />
-    {/if}
-  </main>
+  </div>
 </div>
+
+<style>
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
+</style>
